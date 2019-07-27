@@ -1,7 +1,9 @@
 server:
   port: 8182
   
-spring:  cloud:    stream:
+spring:
+  cloud:
+    stream:
       bindings:
         processorInput:
           destination: queue.input
@@ -33,7 +35,8 @@ spring:  cloud:    stream:
                 password: guest
                 virtual-host: /
                 
-logging:  level:
+logging:
+  level:
     ROOT: INFO
     com.rbailen.cloudstream: debug
     
@@ -47,4 +50,4 @@ logging:  level:
   health:
     show-details: ALWAYS
     binders:
-       enabled: true                    
+       enabled: true

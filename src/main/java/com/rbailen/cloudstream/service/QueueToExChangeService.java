@@ -19,7 +19,7 @@ public class QueueToExChangeService {
 
 	@StreamListener(Processor.INPUT)
 	@SendTo(Processor.OUTPUT)
-	public Payment eventHandler(Payment payment) {
+	public Payment handlerQueueToExChange(Payment payment) {
 		log.debug(payment.toString());		
 		payment.setTotal(payment.getTotal() * INTEREST);	
 		return payment;

@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ExchangeToQueueService {
 
 	@StreamListener(Sink.INPUT)
-	public void processRegisterEmployees(Payment payment) {
+	public void handlerExchangeToQueue(Payment payment) {
 		log.debug(payment.toString());	
 	}
 	
