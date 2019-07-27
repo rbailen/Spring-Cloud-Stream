@@ -1,0 +1,50 @@
+server:
+  port: 8182
+  
+spring:  cloud:    stream:
+      bindings:
+        processorInput:
+          destination: queue.input
+          binder: local_rabbit
+          # Every time there is a new message in an input channel, all subscribers will be notified.
+          # Most of the time, we need the message to be processed only once.
+          group: inputConsumers
+        
+        processorOuput:
+          # exchange
+          destination: queue.output
+          binder: local_rabbit
+          
+        input:
+          # sink
+          destination: queue.output
+          binder: local_rabbit
+          group: sinkConsumers
+          
+      binders:
+        local_rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtual-host: /
+                
+logging:  level:
+    ROOT: INFO
+    com.rbailen.cloudstream: debug
+    
+  endpoints:
+    web: 
+      exposure:
+        include: "*"
+  security:
+    enable: true
+  # Enable the health indicators for binders (when a service is down or starts failing)
+  health:
+    show-details: ALWAYS
+    binders:
+       enabled: true                    
